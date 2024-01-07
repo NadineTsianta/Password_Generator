@@ -88,29 +88,35 @@ let upperCasedCharacters = [
   'Z'
 ];
 
+let passwordLength;
+let passwordUppercase;
+let passwordLowercase;
+let passwordSpecialCharacters;
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let passwordLength = prompt("Select the length for your password, it must be between 8-128 characters long");
+  passwordLength = prompt("Select the length for your password, it must be between 8-128 characters long");
   passwordLength = parseInt(passwordLength);
 
   if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
     prompt("Your password must be between 8 and 128 characters and numeric value");
     return;
   }
+
+  passwordUppercase = confirm("Do you want to include uppercase characters in your password ?");
+  passwordLowercase = confirm("Do you want to include lower case characters ?");
+  passwordSpecialCharacters = confirm("Do you want to include special characters ?");
+
   return passwordLength;
+
 }
-
-let passwordUppercase = confirm("Do you want to include uppercase characters in your password ?");
-let passwordlowercase = confirm("Do you want to include lower case characters ?");
-let passwordSpecialCharacters = confirm("Do you want to include special characters ?");
-
 
 
 // Function for getting a random element from an array
 function getRandom(arr) {
 
   let randomIndex = Math.floor(Math.random() * arr.length);
-  password += arr.length(randomIndex)
+  return arr[randomIndex];
 
 }
 
@@ -123,20 +129,20 @@ function generatePassword() {
     allCharacters = allCharacters.concat(specialCharacters);
   }
 
-  if (passwordlowercase) {
+  if (passwordLowercase) {
     allCharacters = allCharacters.concat(lowerCasedCharacters);
   }
 
   if (passwordUppercase) {
     allCharacters = allCharacters.concat(upperCasedCharacters);
   }
-  let password = "";
+  let genPassword = "";
 
-  for (let i = 0; i < password.length; i++) {
-    password += getRandom(allCharacters)
-
+  for (let i = 0; i < getPasswordOptions(); i++) {
+    genPassword += getRandom(allCharacters);
   }
-  return password;
+
+  return genPassword;
 
 }
 
@@ -155,5 +161,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
 
 
