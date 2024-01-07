@@ -1,5 +1,5 @@
 // Array of special characters to be included in password
-let specialCharacters = [
+const specialCharacters = [
   '@',
   '%',
   '+',
@@ -26,10 +26,10 @@ let specialCharacters = [
 ];
 
 // Array of numeric characters to be included in password
-let numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // Array of lowercase characters to be included in password
-let lowerCasedCharacters = [
+const lowerCasedCharacters = [
   'a',
   'b',
   'c',
@@ -59,7 +59,7 @@ let lowerCasedCharacters = [
 ];
 
 // Array of uppercase characters to be included in password
-let upperCasedCharacters = [
+const upperCasedCharacters = [
   'A',
   'B',
   'C',
@@ -97,18 +97,18 @@ let passwordSpecialCharacters;
 function getPasswordOptions() {
   passwordLength = prompt("Select the length for your password, it must be between 8-128 characters long");
   passwordLength = parseInt(passwordLength);
-  
+
   if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
     prompt("Your password must be between 8 and 128 characters and numeric value");
     return;
   }
-  
+
   passwordUppercase = confirm("Do you want to include uppercase characters in your password ?");
   passwordLowercase = confirm("Do you want to include lower case characters ?");
   passwordSpecialCharacters = confirm("Do you want to include special characters ?");
-  
+
   return passwordLength;
-  
+
 }
 
 
