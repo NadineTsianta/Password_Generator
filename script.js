@@ -88,6 +88,7 @@ const upperCasedCharacters = [
   'Z'
 ];
 
+
 let passwordLength;
 let passwordUppercase;
 let passwordLowercase;
@@ -106,6 +107,12 @@ function getPasswordOptions() {
   passwordUppercase = confirm("Do you want to include uppercase characters in your password ?");
   passwordLowercase = confirm("Do you want to include lower case characters ?");
   passwordSpecialCharacters = confirm("Do you want to include special characters ?");
+
+  if (!passwordLowercase && !passwordUppercase && !passwordSpecialCharacters) {
+    alert("Your password must contain letters and/or characters alongside numbers");
+    return;
+  }
+  
 
   return passwordLength;
 
@@ -132,7 +139,7 @@ function generatePassword() {
   if (passwordLowercase) {
     allCharacters = allCharacters.concat(lowerCasedCharacters);
   }
-
+ 
   if (passwordUppercase) {
     allCharacters = allCharacters.concat(upperCasedCharacters);
   }
@@ -154,6 +161,7 @@ function writePassword() {
   getPasswordOptions();
   let password = generatePassword();
   let passwordText = document.querySelector('#password');
+
 
   passwordText.value = password;
   return password
