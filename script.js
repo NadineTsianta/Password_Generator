@@ -88,11 +88,13 @@ const upperCasedCharacters = [
   'Z'
 ];
 
-
+let passwordNumbers;
 let passwordLength;
 let passwordUppercase;
 let passwordLowercase;
 let passwordSpecialCharacters;
+
+let usercheck = true;
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -103,13 +105,23 @@ function getPasswordOptions() {
     prompt("Your password must be between 8 and 128 characters and numeric value");
     return;
   }
+  passwordNumbers = confirm ("Do you wnat to include numbers in your password ?")
 
   passwordUppercase = confirm("Do you want to include uppercase characters in your password ?");
   passwordLowercase = confirm("Do you want to include lower case characters ?");
   passwordSpecialCharacters = confirm("Do you want to include special characters ?");
 
-  if (!passwordLowercase && !passwordUppercase && !passwordSpecialCharacters) {
+  if (!passwordLowercase && !passwordUppercase && !passwordSpecialCharacters && !passwordNumbers) {
     alert("Your password must contain letters and/or characters alongside numbers");
+    /*
+    If they said no to everthing,
+    we are going to store a false value into some kind of variable
+    Then when we get to the generatePassword function
+    We check the variable to see if it's false,
+    if it is, return nothing and don't run the algorithm
+    
+    */
+   usercheck = false;
     return;
   }
   
@@ -130,6 +142,11 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
+
+  if (!usercheck) {
+return "";
+  };
+
   let allCharacters = [];
 
   if (passwordSpecialCharacters) {
@@ -138,6 +155,9 @@ function generatePassword() {
 
   if (passwordLowercase) {
     allCharacters = allCharacters.concat(lowerCasedCharacters);
+  } 
+  if (passwordNumbers) {
+    allCharacters = allCharacters.concat(numericCharacters);
   }
  
   if (passwordUppercase) {
@@ -145,6 +165,12 @@ function generatePassword() {
   }
   let genPassword = "";
 
+  /*
+  for - the sntax to start a loop
+  let i =0; the looping variable that will change over time (it doesn't have to start at 0)
+  i<passwordLength; - this is the condition. If condition is true, continue loop, else stop the loop
+  i++ ; - after we run the code, change the looping variable
+  */
   for (let i = 0; i < passwordLength; i++) {
     genPassword += getRandom(allCharacters);
   }
@@ -152,6 +178,7 @@ function generatePassword() {
   return genPassword;
 
 }
+
 
 // Get references to the #generate element
 let generateBtn = document.querySelector('#generate');
@@ -173,3 +200,8 @@ generateBtn.addEventListener("click", writePassword);
 
 
 
+/**
+ * What is is doing?
+ * Why do I need it?
+ * How do I use it?
+ */
